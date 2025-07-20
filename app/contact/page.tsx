@@ -73,6 +73,8 @@ export default function Contact() {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
+    console.log('Form submitted with data:', formData);
+
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -82,7 +84,9 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
 
       if (!response.ok) {
         throw new Error(data.error || 'Something went wrong');

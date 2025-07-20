@@ -23,8 +23,19 @@ export default function AdminContacts() {
 
   const fetchContacts = async () => {
     try {
+      console.log('Fetching contacts...');
       const response = await fetch('/api/contact');
+      console.log('Response status:', response.status);
+      
+      if (response.status === 401) {
+        setError('Unauthorized access. Please login again.');
+        setLoading(false);
+        return;
+      }
+      
       const data = await response.json();
+      console.log('Response data:', data);
+      
       setContacts(data.contacts || []);
       setLoading(false);
     } catch (error) {

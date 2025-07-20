@@ -36,4 +36,6 @@ const ContactSchema = new mongoose.Schema({
   timestamps: true,
 });
 
+// Add index for better performance
+ContactSchema.index({ createdAt: -1 });
 export default mongoose.models.Contact || mongoose.model<IContact>('Contact', ContactSchema);

@@ -36,9 +36,12 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('POST /api/contact called');
     await connectDB();
+    console.log('Database connected');
     
     const { name, email, subject, message } = await request.json();
+    console.log('Received data:', { name, email, subject, message });
 
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
@@ -54,7 +57,9 @@ export async function POST(request: NextRequest) {
       message,
     });
 
+    console.log('Creating contact:', contact);
     await contact.save();
+    console.log('Contact saved successfully');
     
     return NextResponse.json({ 
       message: 'Contact message sent successfully',
