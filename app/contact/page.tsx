@@ -74,11 +74,19 @@ export default function Contact() {
     setSubmitStatus('idle');
 
     try {
-      // Placeholder function - replace with actual API endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Simulate API call
-      console.log('Form data submitted:', formData);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
       
       setSubmitStatus('success');
       setFormData({
