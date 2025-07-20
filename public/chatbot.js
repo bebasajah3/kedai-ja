@@ -576,9 +576,11 @@
     document.body.appendChild(chatWindow);
   
     // Tampilkan badge notifikasi setelah 3 detik
-    setTimeout(() => {
-      if (chatWindow.style.display !== 'flex') {
-        badge.style.display = 'flex';
-      }
-    }, 3000);
+   if (typeof window !== 'undefined') {
+     setTimeout(() => {
+       if (chatWindow.style.display !== 'flex') {
+         badge.style.display = 'flex';
+       }
+     }, 3000);
+   }
   })();
